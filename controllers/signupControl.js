@@ -38,12 +38,12 @@ async function insertVerifyUser(name, email, password) {
     // Generate the activation link and email content
     const activationLink = `${process.env.API_URL}/signup/${token}`;
     const content = `<h4>Hi, there</h4>
-        <h5>Welcome to the DeCritic App</h5>
+        <h5>Welcome to the secritic App</h5>
         <p>Thank you for signing up. <a href="${activationLink}"><b>Click here</b></a> to activate your account</p>
         <p>This link is valid for the next 1 hour. If you don’t activate your account within this time frame, you will need to request a new activation link.</p>
         <br><br>
         <p>Regards</p>
-        <p>DeCritic</p>`;
+        <p>secritic</p>`;
 
     // Save the new VerifyUser instance and send the email
     await newUser.save();
@@ -86,22 +86,22 @@ async function insertSignupUser(token) {
 
       // Generate the email content for successful registration
       const content = `<h3>Activation Successful!</h3>
-            <h4>Welcome to the DeCritic Family</h4>
+            <h4>Welcome to the secritic Family</h4>
             <p>You are successfully registered</p>
             <p>Go back to site and <a href="${process.env.APP_LOGIN_URL}">login</a> to continue</p>
             <br><br>
             <p>Regards</p>
-            <p>DeCritic</p>`;
+            <p>secritic</p>`;
 
       sendMail(newUser.email, "Activation Successful!", content);
 
       return `<h3>Activation Successful!</h3>
-            <h4>Welcome to the DeCritic Family</h4>
+            <h4>Welcome to the secritic Family</h4>
             <p>You are successfully registered</p>
             <p>Go back to site and <a href="${process.env.APP_LOGIN_URL}">login</a> to continue</p>
             <br><br>
             <p>Regards</p>
-            <p>DeCritic</p>`;
+            <p>secritic</p>`;
     }
 
     return `<h3>Activation failed</h3>
@@ -109,7 +109,7 @@ async function insertSignupUser(token) {
             <p>Try to sign up again</p>
             <br><br>
             <p>Regards</p>
-            <p>DeCritic</p>`;
+            <p>secritic</p>`;
   } catch (e) {
     if (e.name === "TokenExpiredError") {
       console.error("Token expired: ", e);
@@ -118,7 +118,7 @@ async function insertSignupUser(token) {
             <p>Try to sign up again</p>
             <br><br>
             <p>Regards</p>
-            <p>DeCritic</p>`;
+            <p>secritic</p>`;
     }
 
     console.error("Error during insertSignupUser: ", e);
@@ -126,7 +126,7 @@ async function insertSignupUser(token) {
             <p>Unexpected error happened...</p>
             <br><br>
             <p>Regards</p>
-            <p>DeCritic</p>`;
+            <p>secritic</p>`;
   }
 }
 

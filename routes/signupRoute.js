@@ -44,7 +44,7 @@ router.get("/:token", async (req, res) => {
       <p>Try to sigingin up again</p>
       <br><br>
       <p>Regards</p>
-      <p>DeCritic</p> `);
+      <p>secritic</p> `);
   }
 });
 
