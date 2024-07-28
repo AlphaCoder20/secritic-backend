@@ -7,6 +7,7 @@ const connectDb = require("./database/index");
 const signupRouter = require("./routes/signupRoute");
 const loginRouter = require("./routes/loginRoute");
 const homeRouter = require("./routes/homeRoute");
+const updateRouter = require("./routes/updateRoute")
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ connectDb();
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/home", homeRouter);
+app.use("/update", updateRouter);
 
 app.get("/", (req, res) => {
   res.send("API Alive");
@@ -28,6 +30,6 @@ app.listen(PORT, () => {
   try {
     console.log(`App listening on port ${PORT}`);
   } catch (e) {
-    console.error("Error during all listen: ", e);
+    console.error("Error during app listen: ", e);
   }
 });

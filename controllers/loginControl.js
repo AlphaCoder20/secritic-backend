@@ -23,26 +23,31 @@ async function authenticateUser(email, password) {
     const validPassword = await bcrypt.compare(password, userCheck.password);
     if (validPassword) {
       const newToken = jwt.sign({ email }, process.env.LOGIN_SECRET_TOKEN);
-      const response = {
-        id: userCheck._id,
-        name: userCheck.name,
-        email: userCheck.email,
-        token: newToken,
-        status: true,
-      };
 
+      // update the database
       await User.findOneAndUpdate(
         { email: userCheck.email },
         { $set: { token: newToken } },
         { new: true }
       );
+
+      // update the redisClient
+      const response = {
+        id: userCheck._id,
+        name: userCheck.name,
+        email: userCheck.email,
+        password: userCheck.password,
+        token: newToken,
+        status: true,
+      };
+
       await redisClient.set(`key-${email}`, JSON.stringify(response));
 
       return response;
     }
     return false;
-  } catch (e) {
-    console.error("Error during authenticateUser: ", e);
+  } catch (error) {
+    console.error("Error during authenticateUser: ", error);
     return "Server Busy";
   }
 }

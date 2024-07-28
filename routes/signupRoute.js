@@ -33,9 +33,10 @@ router.post("/verify", async (req, res) => {
   }
 });
 
-router.get("/:token", async (req, res) => {
+router.get("/:path/:token", async (req, res) => {
   try {
-    const response = await insertSignupUser(req.params.token);
+    const { path, token } = req.params;
+    const response = await insertSignupUser(path, token);
     res.status(200).send(response);
   } catch (e) {
     console.error("Error during get /:token: ", e);
